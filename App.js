@@ -7,7 +7,7 @@ import Svg, { Path, Ellipse } from "react-native-svg";
 const { width, height } = Dimensions.get('window');
 import ButtonGradient from './ButtonGradient';
 import Login from './src/Login';
-import Home from './src/Home';
+import Home from './components/Home';
 
 const Stack = createStackNavigator();
 export default function App() {
