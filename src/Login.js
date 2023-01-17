@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity } from 'react-native';
 import Svg, { Path, Ellipse} from "react-native-svg";
 const {width, height} = Dimensions.get('window');
 import ButtonGradient from '../ButtonGradient';
@@ -28,6 +28,7 @@ export default function Login() {
   </Svg>
     )
   }
+  const navigation = useNavigation()
   return (
     <View style={styles.mainContainer}>
       <View style={styles.containerSvg}>
@@ -47,7 +48,9 @@ export default function Login() {
       />
       <Text style={styles.forgotPassword}>Forgot your password?</Text>
       <ButtonGradient/>
+      <TouchableOpacity onPress={() => navigation.navigate("Register")}>
       <Text style={styles.forgotPassword}>Don't have an account</Text>
+      </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
     </View>
