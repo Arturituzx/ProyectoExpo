@@ -8,6 +8,7 @@ const { width, height } = Dimensions.get('window');
 import ButtonGradient from './ButtonGradient';
 import Login from './src/Login';
 import Home from './components/Home';
+import Register from './src/Register';
 
 const Stack = createStackNavigator();
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
         <Stack.Navigator initialRouteName='Login' screenOptions={{ headerShown: false }}>
             <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} ></Stack.Screen>
             <Stack.Screen name='Home' component={Home} options={{ headerShown: false }} ></Stack.Screen>
+            <Stack.Screen name='Register' component={Register} options={{ headerShown: false }} ></Stack.Screen>
 
         </Stack.Navigator>
       </NavigationContainer>
