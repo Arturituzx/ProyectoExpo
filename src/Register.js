@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { Input } from 'native-base'
 import { StyleSheet, Text, View, TextInput, Dimensions, TouchableHighlight } from 'react-native';
-import DateTimePicker from "@react-native-community/datetimepicker"
+import DateTimePicker from "react-native-modal-datetime-picker";
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/AntDesign';
 import Icon3 from 'react-native-vector-icons/Entypo';
@@ -21,7 +21,6 @@ export default function Register() {
 
   const showMode = (currentMode) => {
     setShow(true)
-    setMode(currentMode)
   };
 
   const onChange = (event, selectedDate) => {
@@ -40,6 +39,17 @@ export default function Register() {
     d = (d < 10) ? '0' + d : d;
     return [d, m, y].join('-')
   }
+
+  const hideDateTimePicker  = () => {
+    setShow(false)
+  };
+
+  const handleDatePicked = (date) => {
+    let tempDate = new Date(currentDate);
+    setDate(tempDate)
+    setText(joinDate(tempDate))
+    hideDateTimePicker();
+  };
 
   function SvgTop() {
     return (
@@ -66,7 +76,7 @@ export default function Register() {
   }
   return (
     <View style={styles.mainContainer}>
-      {show && <DateTimePicker testID='dateTimePicker' value={date} mode={mode} display='default' onChange={onChange} />}
+      <DateTimePicker isVisible={show} onCancel={hideDateTimePicker} onConfirm={handleDatePicked} testID='dateTimePicker' value={date} mode={mode} display='default' onChange={onChange} />
       <View style={styles.containerSvg}>
         <SvgTop />
       </View>
