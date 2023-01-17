@@ -40,12 +40,12 @@ export default function Register() {
     return [d, m, y].join('-')
   }
 
-  const hideDateTimePicker  = () => {
+  const hideDateTimePicker = () => {
     setShow(false)
   };
 
   const handleDatePicked = (date) => {
-    let tempDate = new Date(currentDate);
+    let tempDate = new Date(date);
     setDate(tempDate)
     setText(joinDate(tempDate))
     hideDateTimePicker();
@@ -76,7 +76,10 @@ export default function Register() {
   }
   return (
     <View style={styles.mainContainer}>
-      <DateTimePicker isVisible={show} onCancel={hideDateTimePicker} onConfirm={handleDatePicked} testID='dateTimePicker' value={date} mode={mode} display='default' onChange={onChange} />
+      <DateTimePicker isVisible={isDatePickerVisible}
+        mode={date}
+        onConfirm={handleDatePicked}
+        onCancel={hideDateTimePicker} />
       <View style={styles.containerSvg}>
         <SvgTop />
       </View>
@@ -89,7 +92,7 @@ export default function Register() {
           placeholder='Apellido Paterno' />
         <View style={styles.searchSection}>
 
-          <TextInput 
+          <TextInput
             style={styles.input}
             editable={false}
             placeholder="Fecha de Nacimiento"
