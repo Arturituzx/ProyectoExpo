@@ -21,6 +21,7 @@ export default function Register() {
 
   const showMode = (currentMode) => {
     setShow(true)
+    setMode(currentMode)
   };
 
   const onChange = (event, selectedDate) => {
@@ -76,7 +77,7 @@ export default function Register() {
   }
   return (
     <View style={styles.mainContainer}>
-      <DateTimePicker isVisible={isDatePickerVisible}
+      <DateTimePicker isVisible={show}
         mode={date}
         onConfirm={handleDatePicked}
         onCancel={hideDateTimePicker} />
