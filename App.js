@@ -9,6 +9,7 @@ import ButtonGradient from './ButtonGradient';
 import Login from './src/Login';
 import Home from './components/Home';
 import Register from './src/Register';
+import ForgPass from './src/ForgPass';
 
 const Stack = createStackNavigator();
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
             <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} ></Stack.Screen>
             <Stack.Screen name='Home' component={Home} options={{ headerShown: false }} ></Stack.Screen>
             <Stack.Screen name='Register' component={Register} options={{ headerShown: false }} ></Stack.Screen>
+            <Stack.Screen name='ForgPass' component={ForgPass} options={{ headerShown: false }} ></Stack.Screen>
 
         </Stack.Navigator>
       </NavigationContainer>

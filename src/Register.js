@@ -1,56 +1,29 @@
 import { useNavigation } from '@react-navigation/native';
-import { StatusBar } from 'expo-status-bar';
-import { Input } from 'native-base'
-import { StyleSheet, Text, View, TextInput, Dimensions, TouchableHighlight } from 'react-native';
-import DateTimePicker from "react-native-modal-datetime-picker";
-import Icon from 'react-native-vector-icons/Ionicons';
-import Icon2 from 'react-native-vector-icons/AntDesign';
-import Icon3 from 'react-native-vector-icons/Entypo';
-import Icon4 from 'react-native-vector-icons/FontAwesome';
-import Icon5 from 'react-native-vector-icons/Feather';
+import { StyleSheet, Text, View, TextInput, Dimensions, TouchableHighlight, Button } from 'react-native';
 import * as Icons from "react-native-heroicons/solid";
 import Svg, { Path, Ellipse } from "react-native-svg";
-import { useState } from 'react';
+import React, { useState } from 'react';
 const { width, height } = Dimensions.get('window');
+import moment from 'moment';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 export default function Register() {
-  const [date, setDate] = useState(new Date())
-  const [mode, setMode] = useState('date');
-  const [text, setText] = useState();
-  const [show, setShow] = useState(false);
+    
+        const [selectedDate, setSelectedDate] = useState();
+        const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
-  const showMode = (currentMode) => {
-    setShow(true)
-    setMode(currentMode)
-  };
+        const showDatePicker = () => {
+            setDatePickerVisibility(true);
+        };
 
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'ios')
-    let tempDate = new Date(currentDate);
-    setDate(tempDate)
-    setText(joinDate(tempDate))
-  }
+        const hideDatePicker = () => {
+            setDatePickerVisibility(false);
+        };
 
-  function joinDate(newDate) {
-    let y = newDate.getFullYear();
-    let m = newDate.getMonth() + 1;
-    let d = newDate.getDate();
-    m = (m < 10) ? '0' + m : m;
-    d = (d < 10) ? '0' + d : d;
-    return [d, m, y].join('-')
-  }
-
-  const hideDateTimePicker = () => {
-    setShow(false)
-  };
-
-  const handleDatePicked = (date) => {
-    let tempDate = new Date(date);
-    setDate(tempDate)
-    setText(joinDate(tempDate))
-    hideDateTimePicker();
-  };
+        const handleConfirm = (date) => {
+            setSelectedDate(date);
+            hideDatePicker();
+        };
 
   function SvgTop() {
     return (
@@ -77,10 +50,6 @@ export default function Register() {
   }
   return (
     <View style={styles.mainContainer}>
-      <DateTimePicker isVisible={show}
-        mode={date}
-        onConfirm={handleDatePicked}
-        onCancel={hideDateTimePicker} />
       <View style={styles.containerSvg}>
         <SvgTop />
       </View>
@@ -93,11 +62,11 @@ export default function Register() {
           placeholder='Apellido Paterno' />
         <View style={styles.searchSection}>
 
-          <TextInput
+          <TextInput 
             style={styles.input}
             editable={false}
             placeholder="Fecha de Nacimiento"
-            value={text}
+            value={Text}
             onChangeText={(searchString) => { this.setState({ searchString }) }}
             underlineColorAndroid="transparent"
           />
@@ -118,6 +87,16 @@ export default function Register() {
           <Text style={styles.textButton}>Send</Text>
         </TouchableHighlight>
       </View>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>{`Date:  ${selectedDate? moment(selectedDate).format("MM/DD/YYYY"):"Please select date"}`}</Text>
+            <Button title="Show Date Picker" onPress={showDatePicker} />
+            <DateTimePickerModal themeVariant='light'
+            isVisible={isDatePickerVisible}
+            mode="date"
+            onConfirm={handleConfirm}
+            onCancel={hideDatePicker}
+            />
+        </View>
     </View>
   );
 }

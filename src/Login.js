@@ -46,7 +46,9 @@ export default function Login() {
       placeholder='Password'
       secureTextEntry={true} 
       />
+      <TouchableOpacity onPress={() => navigation.navigate("ForgPass")}>
       <Text style={styles.forgotPassword}>Forgot your password?</Text>
+      </TouchableOpacity>
       <ButtonGradient/>
       <TouchableOpacity onPress={() => navigation.navigate("Register")}>
       <Text style={styles.forgotPassword}>Don't have an account</Text>
