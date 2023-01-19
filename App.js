@@ -17,7 +17,6 @@ export default function App() {
   return (
     <>
       <NativeBaseProvider >
-        <StatusBar barStyle={"light-content"} backgroundColor={"#054169"} />
         <NavigationContainer >
           <Stack.Navigator initialRouteName='Login' screenOptions={{ headerShown: false }}>
             <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} ></Stack.Screen>

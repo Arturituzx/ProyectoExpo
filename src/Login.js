@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import Axios from 'axios';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity, Alert, ScrollView, KeyboardAvoidingView,TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Svg, { Path, Ellipse } from "react-native-svg";
 const { width, height } = Dimensions.get('window');
 import ButtonGradient from '../ButtonGradient';
@@ -33,10 +33,10 @@ export default function Login() {
 
       const res = await Axios.post(url_data, formData);
       setLoading(false)
-      if(res.data.error == null) {
+      if (res.data.error == null) {
         console.log(res.data);
       }
-      
+
     } catch (error) {
       setLoading(false)
       Alert.alert(
@@ -78,39 +78,49 @@ export default function Login() {
   }
   const navigation = useNavigation()
   return (
-    <ScrollView style={styles.mainContainer}>
+    <View style={styles.container1}>
       <SpinnerModal loading={loading} text="Iniciando sesión" />
       <View style={styles.containerSvg}>
         <SvgTop />
       </View>
-      <View style={styles.container}>
-        <Text style={styles.title}>Hello</Text>
-        <Text style={styles.subTitle}>Sign in to your account</Text>
-        <TextInput onChangeText={(e) => setCorreo(e)}
-          style={styles.Textinput}
-          placeholder='john-example@gmail.com'
-        />
-        <TextInput
-          style={styles.Textinput} onChangeText={(e) => setPassword(e)}
-          placeholder='Password'
-          secureTextEntry={true}
-        />
-        <TouchableOpacity onPress={() => navigation.navigate("ForgPass")}>
-          <Text style={styles.forgotPassword}>Forgot your password?</Text>
-        </TouchableOpacity>
-        <ButtonGradient onPress={() => submit()} />
-        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-          <Text style={styles.forgotPassword}>Don't have an account</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+      <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container1}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.mainContainer}>
+            <View style={styles.container}>
+              <Text style={styles.title}>Hello</Text>
+              <Text style={styles.subTitle}>Sign in to your account</Text>
+              <TextInput onChangeText={(e) => setCorreo(e)}
+                style={styles.Textinput}
+                placeholder='john-example@gmail.com'
+              />
+              <TextInput
+                style={styles.Textinput} onChangeText={(e) => setPassword(e)}
+                placeholder='Password'
+                secureTextEntry={true}
+              />
+              <TouchableOpacity onPress={() => navigation.navigate("ForgPass")}>
+                <Text style={styles.forgotPassword}>Forgot your password?</Text>
+              </TouchableOpacity>
+              <ButtonGradient onPress={() => submit()} />
+              <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+                <Text style={styles.forgotPassword}>Don't have an account</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container1: {
+    flex: 1,
+  },
   mainContainer: {
     backgroundColor: "#f1f1f1",
-    flex: 1,
   },
   container: {
     alignItems: 'center',
