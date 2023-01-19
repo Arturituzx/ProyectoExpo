@@ -5,10 +5,10 @@ import { useNavigation } from "@react-navigation/native";
 
 
 
-export default function ButtonGradient(){
+export default function ButtonGradient({onPress}){
     const navigation = useNavigation()
     return(
-        <TouchableOpacity style={styles.container} onPress={() => navigation.navigate("Home")}>
+        <TouchableOpacity style={styles.container} onPress={onPress}>
             <LinearGradient
                 // Button Linear Gradient
                 colors={['#FFB677', '#FF3CBD']}

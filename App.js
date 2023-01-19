@@ -10,21 +10,24 @@ import Login from './src/Login';
 import Home from './components/Home';
 import Register from './src/Register';
 import ForgPass from './src/ForgPass';
+import { NativeBaseProvider } from 'native-base';
 
 const Stack = createStackNavigator();
 export default function App() {
   return (
     <>
-      <StatusBar barStyle={"light-content"} backgroundColor={"#054169"} />
-      <NavigationContainer >
-        <Stack.Navigator initialRouteName='Login' screenOptions={{ headerShown: false }}>
+      <NativeBaseProvider >
+        <StatusBar barStyle={"light-content"} backgroundColor={"#054169"} />
+        <NavigationContainer >
+          <Stack.Navigator initialRouteName='Login' screenOptions={{ headerShown: false }}>
             <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} ></Stack.Screen>
             <Stack.Screen name='Home' component={Home} options={{ headerShown: false }} ></Stack.Screen>
             <Stack.Screen name='Register' component={Register} options={{ headerShown: false }} ></Stack.Screen>
             <Stack.Screen name='ForgPass' component={ForgPass} options={{ headerShown: false }} ></Stack.Screen>
 
-        </Stack.Navigator>
-      </NavigationContainer>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </NativeBaseProvider>
     </>
   );
 }
