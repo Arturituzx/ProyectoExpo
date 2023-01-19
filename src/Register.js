@@ -11,6 +11,7 @@ import moment from 'moment';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { validateMail } from './utils/validation';
 import { Config } from './configuration/config';
+import { TouchableOpacity } from 'react-native';
 
 export default function Register() {
 
@@ -107,7 +108,7 @@ export default function Register() {
           placeholder='Apellido Paterno' />
         <TextInput style={styles.Textinput} onChangeText={(e) => setApellidoMaterno(e)}
           placeholder='Apellido Materno' />
-        <View style={styles.searchSection}>
+        <TouchableOpacity style={styles.searchSection} onPress={showDatePicker}>
 
           <TextInput
             style={styles.input}
@@ -116,11 +117,11 @@ export default function Register() {
             value={date ? moment(date).format("DD/MM/YYYY") : ""}
             underlineColorAndroid="transparent"
           />
-          <Icons.CalendarDaysIcon onPress={showDatePicker}
+          <Icons.CalendarDaysIcon
             color='#0096D6'
             style={{ marginRight: 6 }}
           />
-        </View>
+        </TouchableOpacity>
         {/* <TextInput style={styles.Textinput} editable={false} color="black" keyboardType='numeric' textAlign="center" border="1" borderColor='cofco.50' placeholder={text} /> */}
         <TextInput style={styles.Textinput} onChangeText={(e) => setCorreo(e)}
           placeholder='Correo' />
@@ -149,7 +150,7 @@ export default function Register() {
         </TouchableHighlight>
       </View>
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <DateTimePickerModal themeVariant='light' date={date}
+        <DateTimePickerModal textColor='black' date={date}
           isVisible={isDatePickerVisible}
           mode="date"
           onConfirm={handleConfirm}

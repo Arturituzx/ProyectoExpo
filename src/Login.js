@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import Axios from 'axios';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import Svg, { Path, Ellipse } from "react-native-svg";
 const { width, height } = Dimensions.get('window');
 import ButtonGradient from '../ButtonGradient';
@@ -78,7 +78,7 @@ export default function Login() {
   }
   const navigation = useNavigation()
   return (
-    <View style={styles.mainContainer}>
+    <ScrollView style={styles.mainContainer}>
       <SpinnerModal loading={loading} text="Iniciando sesión" />
       <View style={styles.containerSvg}>
         <SvgTop />
@@ -103,7 +103,7 @@ export default function Login() {
           <Text style={styles.forgotPassword}>Don't have an account</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
