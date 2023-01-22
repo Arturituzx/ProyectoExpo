@@ -19,6 +19,7 @@ import {
 import { AuthContext } from './DrawerContent/context';
 import axios from 'axios';
 import HomeStack from './homeStack';
+import LogOut from '../logout';
 
 const Drawer = createDrawerNavigator();
 
@@ -89,7 +90,7 @@ export default function SideBarStack(props) {
                                 }}
                             />
                             
-                            {/* <Drawer.Screen name='SideLogout' options={{ title: 'Cerrar sesión', headerShown: false }} component={LogOut} /> */}
+                            <Drawer.Screen name='SideLogout' options={{ title: 'Cerrar sesión', headerShown: false }} component={LogOut} />
 
                         </Drawer.Navigator>
 

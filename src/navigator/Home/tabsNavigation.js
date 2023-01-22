@@ -44,10 +44,14 @@ export default function TabsNavigation({ navigation }) {
         <>
             <View style={{ flexDirection: "row", alignItems: "center", paddingVertical: 10 }}>
                 <Row_simple jus_cont={'space-between'} w={'100%'}>
-                    <Row_simple>
-                    <Pressable onPress={() => navigation.openDrawer()}
-                        style={{ marginLeft: 15, marginRight: 5 }}>
-                        <Ionicons name='ios-menu' color="#b99a55" size={34} ></Ionicons>
+                    <Row_simple jus_cont={'space-between'} w={'100%'}>
+                        <Pressable onPress={() => navigation.openDrawer()}
+                            style={{ marginLeft: 15, marginRight: 5 }}>
+                            <Ionicons name='ios-menu' color="#b99a55" size={34} ></Ionicons>
+                        </Pressable>
+                        <Pressable onPress={() => navigation.navigate('SideLogout')}
+                            style={{ marginLeft: 15, marginRight: 5 }}>
+                            <Ionicons name='ios-menu' color="#b99a55" size={34} ></Ionicons>
                         </Pressable>
                     </Row_simple>
                 </Row_simple>
@@ -56,70 +60,70 @@ export default function TabsNavigation({ navigation }) {
             <Tab.Navigator tabBarPosition="bottom" swipeVelocityImpact={0.1}
                 screenOptions={
                     ({ route }) => ({
-                    tabBarActiveTintColor: Colors.colorSecondaryVariant,
-                    tabBarInactiveTintColor: Colors.colorSecondary,
-                    tabBarShowIcon: true,
-                    tabBarStyle: {
-                        paddingTop: 3,
-                        paddingBottom: 6,
-                    },
-                    tabBarPressColor: "white",
-                    tabBarShowLabel: false,
-                    tabBarIndicatorStyle: {
-                        height: 3,
-                        // marginLeft:((Dimensions.get('window').width)/4)-65,
-                        width: rol == 1 || rol == 3 ? ((Dimensions.get('window').width) / 2.5) : Dimensions.get('window').width,
-                        marginLeft: rol == 1 || rol == 3 ? 20 : 0,
-                        top: 0,
-                    },
-                    tabBarIcon: ({ focused, color, size }) => {
-                        let iconName;
-                        if (route.name == 'shop_home') {
-                            if (focused) {
-                                return <Ionicons name='ios-home' size={25} color={"#b99a55"}></Ionicons>
-                            } else {
-                                return <Ionicons name='ios-home' size={25} color={"#888780"}></Ionicons>
-                            }
-
-                        }
-                        if (route.name == 'shop_home5') {
-
-
-                            if (focused) {
-
-                                return <Oticons name='checklist' size={25} color={"#b99a55"}></Oticons>
-
-                            } else {
-
-                                return <Oticons name='checklist' size={25} color={"#888780"}></Oticons>
+                        tabBarActiveTintColor: Colors.colorSecondaryVariant,
+                        tabBarInactiveTintColor: Colors.colorSecondary,
+                        tabBarShowIcon: true,
+                        tabBarStyle: {
+                            paddingTop: 3,
+                            paddingBottom: 6,
+                        },
+                        tabBarPressColor: "white",
+                        tabBarShowLabel: false,
+                        tabBarIndicatorStyle: {
+                            height: 3,
+                            // marginLeft:((Dimensions.get('window').width)/4)-65,
+                            width: rol == 1 || rol == 3 ? ((Dimensions.get('window').width) / 2.5) : Dimensions.get('window').width,
+                            marginLeft: rol == 1 || rol == 3 ? 20 : 0,
+                            top: 0,
+                        },
+                        tabBarIcon: ({ focused, color, size }) => {
+                            let iconName;
+                            if (route.name == 'shop_home') {
+                                if (focused) {
+                                    return <Ionicons name='ios-home' size={25} color={"#b99a55"}></Ionicons>
+                                } else {
+                                    return <Ionicons name='ios-home' size={25} color={"#888780"}></Ionicons>
+                                }
 
                             }
+                            if (route.name == 'shop_home5') {
 
 
-                            //return <IconFont5 name='coins' size={25} color={"#888780"}></IconFont5>
-                        }
-                        if (route.name == 'shop_home6') {
+                                if (focused) {
 
-                            if (focused) {
+                                    return <Oticons name='checklist' size={25} color={"#b99a55"}></Oticons>
 
-                                return <IconFont name='user' size={25} color={"#b99a55"}></IconFont>
+                                } else {
 
-                            } else {
+                                    return <Oticons name='checklist' size={25} color={"#888780"}></Oticons>
 
-                                return <IconFont name='user' size={25} color={"#888780"}></IconFont>
+                                }
 
+
+                                //return <IconFont5 name='coins' size={25} color={"#888780"}></IconFont5>
                             }
+                            if (route.name == 'shop_home6') {
 
-                            //return <IconFont name='university' size={25} color={"#888780"}></IconFont>
+                                if (focused) {
+
+                                    return <IconFont name='user' size={25} color={"#b99a55"}></IconFont>
+
+                                } else {
+
+                                    return <IconFont name='user' size={25} color={"#888780"}></IconFont>
+
+                                }
+
+                                //return <IconFont name='university' size={25} color={"#888780"}></IconFont>
+                            }
+                            if (route.name == 'shop_home7') {
+                                return <IconEnt name='dots-three-horizontal' size={25} color={"#888780"}></IconEnt>
+                            }
+                            // return <Ionicons name={iconName} size={25} color={"white"}></Ionicons>
+                            // return <Icon name='home'></Icon>
+                            // return <Icon source={iconName} size={25}></Icon>
                         }
-                        if (route.name == 'shop_home7') {
-                            return <IconEnt name='dots-three-horizontal' size={25} color={"#888780"}></IconEnt>
-                        }
-                        // return <Ionicons name={iconName} size={25} color={"white"}></Ionicons>
-                        // return <Icon name='home'></Icon>
-                        // return <Icon source={iconName} size={25}></Icon>
-                    }
-                })}
+                    })}
                 initialRouteName="shop_home3"
             >
                 {/* <Tab.Screen name='shop_home' component={Home}
