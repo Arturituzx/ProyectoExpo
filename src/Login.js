@@ -2,14 +2,18 @@ import { useNavigation } from '@react-navigation/native';
 import Axios from 'axios';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity, Alert, ScrollView, KeyboardAvoidingView,TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity, Alert, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Svg, { Path, Ellipse } from "react-native-svg";
+import { useDispatch } from 'react-redux';
 const { width, height } = Dimensions.get('window');
 import ButtonGradient from '../ButtonGradient';
+import { SaveLogin, SaveToken, SaveUser } from './actions/loginActions';
 import { Config } from './configuration/config';
+import { storeTokenJWT, storeUserData } from './utils/AsyncStore';
 import SpinnerModal from './utils/components/spinnerModal';
 export default function Login() {
 
+  const dispatch = useDispatch();
   const url_data = Config.URL_SERVER + "/login"
   const [loading, setLoading] = useState(false)
   const [correo, setCorreo] = useState(null)
@@ -32,9 +36,15 @@ export default function Login() {
     try {
 
       const res = await Axios.post(url_data, formData);
-      setLoading(false)
       if (res.data.error == null) {
         console.log(res.data);
+        let user = res.data.data.user
+        await storeTokenJWT(res.data.data.token)
+        await storeUserData(user)
+        setLoading(false)
+        dispatch(SaveToken(res.data.data.token))
+        dispatch(SaveUser(user))
+        dispatch(SaveLogin(true))
       }
 
     } catch (error) {
@@ -84,8 +94,8 @@ export default function Login() {
         <SvgTop />
       </View>
       <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container1}>
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.container1}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.mainContainer}>
             <View style={styles.container}>

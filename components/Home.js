@@ -13,7 +13,6 @@ export default function Home() {
         <Switch value={ colorScheme === "dark"} onChange={toggleColorScheme} />
       </View>
       <ProductsList />
-      <StatusBar style={ colorScheme === "dark" ? "light" : "dark" }/>
     </SafeAreaView>
   );
 }

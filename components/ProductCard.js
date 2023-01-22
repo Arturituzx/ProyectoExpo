@@ -39,7 +39,7 @@ export default function ProductCard ({
                         />
                     </View>
                         <Text className="text-2xl font-extrabold dark:text-white">
-                            ${price * count}
+                            ${(price * count).toFixed(2)}
                         </Text>
                 </View>
                 

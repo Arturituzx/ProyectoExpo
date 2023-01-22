@@ -1,71 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Dimensions } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack';
-import 'react-native-gesture-handler';
-import Svg, { Path, Ellipse } from "react-native-svg";
-const { width, height } = Dimensions.get('window');
-import ButtonGradient from './ButtonGradient';
-import Login from './src/Login';
-import Home from './components/Home';
-import Register from './src/Register';
-import ForgPass from './src/ForgPass';
-import { NativeBaseProvider } from 'native-base';
+import 'react-native-gesture-handler'
 
-const Stack = createStackNavigator();
+import React, { useEffect } from 'react'
+import Routes_init from './Routes_init'
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import reduxThunk from "redux-thunk";
+import reducers from "./src/reducers";
+import SplashScreen from "react-native-splash-screen";
+
+
+const store = createStore(
+  reducers, //todo los reducers
+  {}, //estado inicial
+  applyMiddleware(reduxThunk) //Middleware
+);
+
+
+
+
 export default function App() {
+
+
   return (
-    <>
-      <NativeBaseProvider >
-        <NavigationContainer >
-          <Stack.Navigator initialRouteName='Login' screenOptions={{ headerShown: false }}>
-            <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} ></Stack.Screen>
-            <Stack.Screen name='Home' component={Home} options={{ headerShown: false }} ></Stack.Screen>
-            <Stack.Screen name='Register' component={Register} options={{ headerShown: false }} ></Stack.Screen>
-            <Stack.Screen name='ForgPass' component={ForgPass} options={{ headerShown: false }} ></Stack.Screen>
-
-          </Stack.Navigator>
-        </NavigationContainer>
-      </NativeBaseProvider>
-    </>
-  );
+    <Provider store={store}>
+      <Routes_init />
+    </Provider>
+  )
 }
-
-const styles = StyleSheet.create({
-  mainContainer: {
-    backgroundColor: "#f1f1f1",
-    flex: 1,
-  },
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  containerSvg: {
-    width: width,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 80,
-    color: "#34434D",
-    fontWeight: 'bold',
-  },
-  subTitle: {
-    fontSize: 20,
-    color: 'gray',
-  },
-  Textinput: {
-    padding: 10,
-    paddingStart: 20,
-    width: '80%',
-    height: 50,
-    marginTop: 20,
-    borderRadius: 30,
-    backgroundColor: '#fff'
-  },
-  forgotPassword: {
-    fontSize: 14,
-    color: 'gray',
-    marginTop: 20
-  }
-});
